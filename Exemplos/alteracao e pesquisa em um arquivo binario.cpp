@@ -1,10 +1,10 @@
 /*
-Exemplo de ALTERA«√O e pesquisa em um arquivo bin·rio.
+Exemplo de ALTERA√á√ÉO e pesquisa em um arquivo bin√°rio.
 Profa. Ariane Scarelli, CTI-Unesp, out-2014
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.c> //para usar funÁıes gotoxy, clrscr, textbackground, textcolor
+#include <conio.c> //para usar fun√ß√µes gotoxy, clrscr, textbackground, textcolor
 struct estrut1
 {
 	int codigo;
@@ -15,7 +15,7 @@ struct estrut1
 		int dia, mes, ano;
 	}dnasc;
 	char email[20];
-	char excluido;//para a exclus„o lÛgica que interferir· na alteraÁ„o
+	char excluido;//para a exclus√£o l√≥gica que interferir√° na altera√ß√£o
 }agenda;
 
 FILE *fp;
@@ -43,14 +43,14 @@ void mostra_dados()
 void digita_dados()
 {
 	char aux_dia[3],aux_mes[3],aux_ano[5];
-	/* o cÛdigo foi exibido na funÁ„o mostra_dados(), mas 
-	   como È a chave prim·ria n„o pode ser alterado */
+	/* o c√≥digo foi exibido na fun√ß√£o mostra_dados(), mas 
+	   como √© a chave prim√°ria n√£o pode ser alterado */
 	fflush(stdin);	
 	gotoxy(18,6);gets(agenda.nome);
 	gotoxy(18,7);gets(agenda.sexo);
 	gotoxy(42,7);gets(aux_dia);//Os campos dia, mes e ano foram definidos como char[...]
 	gotoxy(45,7);gets(aux_mes);//para permitir pressionar <enter> na
-	gotoxy(48,7);gets(aux_ano);//alteraÁ„o sem perder o conte˙do dos campos.
+	gotoxy(48,7);gets(aux_ano);//altera√ß√£o sem perder o conte√∫do dos campos.
 	agenda.dnasc.dia = atoi(aux_dia);//transforma de char para int
 	agenda.dnasc.mes = atoi(aux_mes);//biblioteca <stdlib.h>
 	agenda.dnasc.ano = atoi(aux_ano);
@@ -62,22 +62,22 @@ void alterar_dados()
 	int aux_codigo,F;
 	long fposicao;
 	char conf;
-	tela_dados("ALTERAÄéO");
-    gotoxy(18,12); printf("Digite o c¢digo a ser alterado: ");
+	tela_dados("ALTERA‚Ç¨≈ΩO");
+    gotoxy(18,12); printf("Digite o c¬¢digo a ser alterado: ");
     scanf("%d", &aux_codigo );
     F = 0;
     do
     {
 		fread( &agenda,sizeof(agenda),1,fp);
-		if ( agenda.codigo == aux_codigo && agenda.excluido=='n')//SOMENTE SE N√O FOI EXCLUIDO	
+		if ( agenda.codigo == aux_codigo && agenda.excluido=='n')//SOMENTE SE N√ÉO FOI EXCLUIDO	
 		{
 	   		F = 1;
-	   		fposicao = ftell(fp); //guarda a posiÁ„o do registro atual do arquivo
+	   		fposicao = ftell(fp); //guarda a posi√ß√£o do registro atual do arquivo
 	   		mostra_dados();
 	   		agenda_aux = agenda;//salva os dados do registro atual numa estrutura auxiliar
 	   		digita_dados();
-			// ******> VERIFICA SE HOUVE ALTERA«√O EM CADA UM DOS CAMPOS
-			if (agenda.nome[0] == '\x0')//checa se cada campo est· vazio
+			// ******> VERIFICA SE HOUVE ALTERA√á√ÉO EM CADA UM DOS CAMPOS
+			if (agenda.nome[0] == '\x0')//checa se cada campo est√° vazio
 			    strcpy(agenda.nome, agenda_aux.nome);
 			if (agenda.sexo[0] == '\0')//pode usar '\0' ou '\x0'
 			    strcpy(agenda.sexo, agenda_aux.sexo);
@@ -101,20 +101,20 @@ void alterar_dados()
 		   		//posiciona o ponteiro do arquivo no registro alterado
 				fseek (fp,fposicao-(sizeof(agenda)),SEEK_SET);//em stdio.h
 				/* fposicao-(sizeof(agenda) significa:
-				   >> fposicao: contem a posiÁ„o onde comeÁa o prÛximo registro.
+				   >> fposicao: contem a posi√ß√£o onde come√ßa o pr√≥ximo registro.
 				   >> sizeof(agenda): contem o tamanho total em bytes do registro.
-				   >> A subtraÁ„o (-) entre eles significa reposicionar o ponteiro no 
-				      inÌcio do registro anterior que È onde se deseja alterar.
+				   >> A subtra√ß√£o (-) entre eles significa reposicionar o ponteiro no 
+				      in√≠cio do registro anterior que √© onde se deseja alterar.
 				*/
-				//SEEK_SET indica o inÌcio do arquivo
+				//SEEK_SET indica o in√≠cio do arquivo
 				fwrite (&agenda,sizeof(agenda),1,fp);
 				fflush (fp);
 		   	}
 		}
-	} while ((!F) && (!feof(fp))); //enquanto F for diferente de 1 e n„o for o fim do arquivo
+	} while ((!F) && (!feof(fp))); //enquanto F for diferente de 1 e n√£o for o fim do arquivo
 	if (F==0)
 	{
-		gotoxy(18,15);printf("****** C¢digo nao encontrado ******");
+		gotoxy(18,15);printf("****** C¬¢digo nao encontrado ******");
 		getch();
 	} 	
 }
@@ -124,7 +124,7 @@ void consultar_dados()
 	{
 		if(fread(&agenda, sizeof(agenda), 1, fp) == 1)  
 		{
-			if (agenda.excluido=='n')//significa que o registro n„o foi excluido
+			if (agenda.excluido=='n')//significa que o registro n√£o foi excluido
 			{
 				tela_dados("CONSULTA");
 				mostra_dados();
@@ -146,7 +146,7 @@ void abrir_arquivo(const char *modo)
 }
 main()
 {
-	system("TITLE EXEMPLO ARQUIVO BIN¡RIO - ALTERA«√O E CONSULTA");
+	system("TITLE EXEMPLO ARQUIVO BIN√ÅRIO - ALTERA√á√ÉO E CONSULTA");
 	abrir_arquivo("rb+"); //modo leitura e escrita, o arquivo deve existir
 	alterar_dados();
 	abrir_arquivo("rb"); //modo leitura, o arquivo deve existir
