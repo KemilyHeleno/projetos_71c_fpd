@@ -1,5 +1,5 @@
 /*
-Exemplo simples de cadastro em um arquivo bin·rio.
+Exemplo simples de cadastro em um arquivo bin√°rio.
 Profa. Ariane Scarelli, CTI-Unesp
 */
 #include <stdio.h>
@@ -16,7 +16,7 @@ struct estrut1
 		int dia, mes, ano;
 	}dnasc;
 	char email[20];
-	char excluido;//para a exclus„o lÛgica
+	char excluido;//para a exclus√£o l√≥gica
 }agenda;
 
 FILE *fp;
@@ -43,7 +43,7 @@ void textbackground(int newcolor)
    vActual.attribute = (csbi.wAttributes & 0x0f) | (newcolor << 4);
 }
 
-void cursor (int x) { // mostra ou n„o o cursor do prompt
+void cursor (int x) { // mostra ou n√£o o cursor do prompt
 	switch (x) {
 		case 0: {//ocultar cursor
 			CONSOLE_CURSOR_INFO cursor = {1, FALSE};
@@ -107,7 +107,7 @@ void salvar_dados()
 void abrir_arquivo()
 {
 	if((fp = fopen("arq.bin", "ab+")) == NULL) 
-	/* Abre arquivo bin·rio para leitura e escrita */
+	/* Abre arquivo bin√°rio para leitura e escrita */
 	{
 		gotoxy(18,11);printf("Erro na abertura do arquivo");
 	    exit(1);
