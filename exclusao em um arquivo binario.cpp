@@ -1,11 +1,11 @@
 /*
-Exemplo de EXCLUSÃO em um arquivo binário.
+Exemplo de EXCLUSÃƒO em um arquivo binÃ¡rio.
 Profa. Ariane Scarelli, CTI-Unesp, out-2014
-Atualizações: out-2018.
+AtualizaÃ§Ãµes: out-2018.
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.c> //para usar funções gotoxy, clrscr, textbackground, textcolor
+#include <conio.c> //para usar funÃ§Ãµes gotoxy, clrscr, textbackground, textcolor
 struct estrut1
 {
 	int codigo;
@@ -16,7 +16,7 @@ struct estrut1
 		int dia, mes, ano;
 	}dnasc;
 	char email[20];
-	char excluido;// campo para indicar a exclusão lógica
+	char excluido;// campo para indicar a exclusÃ£o lÃ³gica
 }agenda;
 
 FILE *fp;
@@ -41,14 +41,14 @@ void mostra_dados()
 	gotoxy(48,7);printf("%d",agenda.dnasc.ano);
 	gotoxy(18,8);puts(agenda.email);
 }
-void excluir_dados() //exclusao lógica
+void excluir_dados() //exclusao lÃ³gica
 {
 	int aux_codigo,F;
 	long fposicao;
 	char conf;
 	do{	
-		tela_dados("EXCLUSŽO");
-	    gotoxy(10,12); printf("Digite o c¢digo a ser excluido (digite zero para encerrar): ");
+		tela_dados("EXCLUSÅ½O");
+	    gotoxy(10,12); printf("Digite o cÂ¢digo a ser excluido (digite zero para encerrar): ");
 	    scanf("%d", &aux_codigo );
 	    if (aux_codigo!=0)
 	    {
@@ -57,13 +57,13 @@ void excluir_dados() //exclusao lógica
 		    do
 		    {
 				fread( &agenda,sizeof(agenda),1,fp);
-				if ( agenda.codigo == aux_codigo && agenda.excluido == 'n' ) //SOMENTE SE NÃO FOI EXCLUIDO
+				if ( agenda.codigo == aux_codigo && agenda.excluido == 'n' ) //SOMENTE SE NÃƒO FOI EXCLUIDO
 				{
 			   		F = 1;
-			   		fposicao = ftell(fp); // guarda a posição do registro atual do arquivo
-			   		mostra_dados(); // um registro nunca pode ser excluído sem antes ser apresentado ao usuário
+			   		fposicao = ftell(fp); // guarda a posiÃ§Ã£o do registro atual do arquivo
+			   		mostra_dados(); // um registro nunca pode ser excluÃ­do sem antes ser apresentado ao usuÃ¡rio
 				   	gotoxy(25,22); printf("Confirma exclusao ? (S/N): ");
-				   	// exclusão é uma operação crítica, por isso, sempre será confirmada pelo usuário
+				   	// exclusÃ£o Ã© uma operaÃ§Ã£o crÃ­tica, por isso, sempre serÃ¡ confirmada pelo usuÃ¡rio
 					fflush(stdin);
 					do 
 				   	{
@@ -75,9 +75,9 @@ void excluir_dados() //exclusao lógica
 				   	{
 				   		//posiciona o ponteiro do arquivo no registro a ser excluido logicamente
 						fseek (fp,fposicao-(sizeof(agenda)),SEEK_SET); //em stdio.h
-						//SEEK_SET indica o início do arquivo
-						agenda.excluido='s'; /*atribuição de 's' para o campo excluído para indicar 
-							 que o registro foi excluído ou desativado (exclusão lógica) */
+						//SEEK_SET indica o inÃ­cio do arquivo
+						agenda.excluido='s'; /*atribuiÃ§Ã£o de 's' para o campo excluÃ­do para indicar 
+							 que o registro foi excluÃ­do ou desativado (exclusÃ£o lÃ³gica) */
 						if(fwrite (&agenda,sizeof(agenda),1,fp)==1)
 						{
 							fflush (fp);
@@ -90,7 +90,7 @@ void excluir_dados() //exclusao lógica
 		} // if (aux_codigo!=0)
 		if (F==0 && aux_codigo!=0)
 		{
-			gotoxy(20,15);printf("****** C¢digo nao encontrado ******");
+			gotoxy(20,15);printf("****** CÂ¢digo nao encontrado ******");
 			getch();
 		}
 	}while(aux_codigo!=0);
