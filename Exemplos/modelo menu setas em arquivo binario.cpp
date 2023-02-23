@@ -1,11 +1,11 @@
 /*
 	Exemplo de menu
 		
-	Conteúdos: 
-		-movimentação por setas;
-		-aumento da janela de execução;
+	ConteÃºdos: 
+		-movimentaÃ§Ã£o por setas;
+		-aumento da janela de execuÃ§Ã£o;
 		-uso de cores, posicionamento de cursor, ocultar/mostrar cursor;
-		-uso da função Sleep().
+		-uso da funÃ§Ã£o Sleep().
 	
 	Profa. Ariane Scarelli, CTI-Unesp, Bauru-SP
 	Agosto/2018
@@ -16,7 +16,7 @@
 #include <windows.h>
 #include <conio.h>
 
-//Alterado para 35 linhas e 120 colunas, conforme expansão no 'mode com', para usar gotoxy além de 80x25 
+//Alterado para 35 linhas e 120 colunas, conforme expansÃ£o no 'mode com', para usar gotoxy alÃ©m de 80x25 
 text_info vActual = {0, 0, 79, 24, WHITE, WHITE, C80, 35, 120, 1, 1};
 
 // Orginal: 
@@ -42,7 +42,7 @@ void textbackground(int newcolor)
    vActual.attribute = (csbi.wAttributes & 0x0f) | (newcolor << 4);
 }
 
-void cursor (int x) { // mostra ou não o cursor do prompt
+void cursor (int x) { // mostra ou nÃ£o o cursor do prompt
 	switch (x) {
 		case 0: {//ocultar cursor
 			CONSOLE_CURSOR_INFO cursor = {1, FALSE};
@@ -73,7 +73,7 @@ main()
 	
 	SetConsoleTitle("Muda o Nome na Barra do Windows");
 	system("mode con:cols=120 lines=35"); //aumenta a tela para 120 colunas e 35 linhas
-	//Necessário alterar o 'text_info vActual' para utilizar gotoxy com mais linhas e colunas
+	//NecessÃ¡rio alterar o 'text_info vActual' para utilizar gotoxy com mais linhas e colunas
 	
 	textcolor(1); // cor de letra
 	textbackground(BROWN+BLACK); // cor de fundo
@@ -86,11 +86,11 @@ main()
 		
 		gotoxy(22,3);printf("Modelo de Menu com Setas");
 		gotoxy(10,5);printf("Op%c%co 1", 135, 198);
-		           //135 é o caractere 'ç' e 198 é o caractere 'ã'
+		           //135 Ã© o caractere 'Ã§' e 198 Ã© o caractere 'Ã£'
 		gotoxy(10,7);printf("Op%c%co 2", 135, 198);
 		gotoxy(10,9);printf("Op%c%co 3", 135, 198);
 		gotoxy(10,11);printf("Sair");
-		gotoxy(8,lin); printf("%c", 62);//62 é o caractere '>'
+		gotoxy(8,lin); printf("%c", 62);//62 Ã© o caractere '>'
 		c=getch();
 		gotoxy(8,lin); printf(" ");
 	
@@ -114,13 +114,13 @@ main()
 				break;
 		}
 		
-		switch(c)//Quando teclar enter para escolher opção
+		switch(c)//Quando teclar enter para escolher opÃ§Ã£o
 		{
 			case 13: //teclou enter
 				if(lin==5)
 				{
 					gotoxy(20,15);printf("Voc%c escolheu a \'Opcao 1\'", 136);
-									            //136 é o caractere 'ê'
+									            //136 Ã© o caractere 'Ãª'
 					Sleep(1500);
 					gotoxy(20,15);printf("                           ");					
 				}
