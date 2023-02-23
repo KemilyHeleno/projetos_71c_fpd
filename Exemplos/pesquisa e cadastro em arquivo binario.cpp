@@ -1,14 +1,14 @@
 /*
-Exemplo de CADASTRO e pesquisa em um arquivo bin·rio.
-CHECAGEM para n„o entrar com CHAVE PRIM¡RIA repetida.
-AtribuiÁ„o de valor 'n' para campo EXCLUIDO - Exclus„o lÛgica.
+Exemplo de CADASTRO e pesquisa em um arquivo bin√°rio.
+CHECAGEM para n√£o entrar com CHAVE PRIM√ÅRIA repetida.
+Atribui√ß√£o de valor 'n' para campo EXCLUIDO - Exclus√£o l√≥gica.
 Profa. Ariane Scarelli, CTI-Unesp, out-2014.
-AtualizaÁıes: out-2018.
+Atualiza√ß√µes: out-2018.
 */
 #include <stdio.h>
 #include <stdlib.h>
 //#include <windows.h>
-#include <conio.c> //para usar funÁıes gotoxy, clrscr, textbackground, textcolor
+#include <conio.c> //para usar fun√ß√µes gotoxy, clrscr, textbackground, textcolor
 struct estrut1
 {
 	int codigo;
@@ -19,7 +19,7 @@ struct estrut1
 		int dia, mes, ano;
 	}dnasc;
 	char email[20];
-	char excluido;//para a exclus„o lÛgica
+	char excluido;//para a exclus√£o l√≥gica
 }agenda;
 
 FILE *fp;
@@ -56,35 +56,35 @@ void tela_dados(const char *parte)
 int checar_chave_primaria()
 {
 	int aux_codigo, F;
-	//funÁ„o verifica se um cÛdigo digitado j· foi gravado no arquivo	
+	//fun√ß√£o verifica se um c√≥digo digitado j√° foi gravado no arquivo	
 	do{
-		rewind(fp); //reposiciona o ponteiro no inÌcio do arquivo
+		rewind(fp); //reposiciona o ponteiro no in√≠cio do arquivo
 		F = 0;
 		gotoxy(43,5);scanf("%d",&aux_codigo);
 		if (aux_codigo==0) 
-			break; //CondiÁ„o de encerramento, quebra o laÁo
+			break; //Condi√ß√£o de encerramento, quebra o la√ßo
 		
 	    while( fread( &agenda,sizeof(agenda),1,fp) == 1 )
 		{
 			if( agenda.codigo == aux_codigo && agenda.excluido=='n')
-			{ //o cÛdigo existe ou o cÛdigo foi excluÌdo mas j· foi recadastrado: continuar percorrendo o arquivo para levar ponteiro para eof.
+			{ //o c√≥digo existe ou o c√≥digo foi exclu√≠do mas j√° foi recadastrado: continuar percorrendo o arquivo para levar ponteiro para eof.
 				F = 1;
 			}		
-		}/*o arquivo tem que ser percorrido do inÌcio ao fim, sempre, para verificar possÌveis 
-		   inserÁıes da mesma chave prim·ria no final do arquivo e tambÈm para que o ponteiro
-		   fique em EOF, portanto, pronto para nova inclus„o ao final.
+		}/*o arquivo tem que ser percorrido do in√≠cio ao fim, sempre, para verificar poss√≠veis 
+		   inser√ß√µes da mesma chave prim√°ria no final do arquivo e tamb√©m para que o ponteiro
+		   fique em EOF, portanto, pronto para nova inclus√£o ao final.
 		  
-		  -->  CorreÁ„o de lÛgica no algoritmo de quando se tentava reincluir 
-		     um cÛdigo j· deletado!! (Em outubro/2018) <--
+		  -->  Corre√ß√£o de l√≥gica no algoritmo de quando se tentava reincluir 
+		     um c√≥digo j√° deletado!! (Em outubro/2018) <--
 	     
 		 */
 	    if( F == 1 )
 		{													
 			fflush(stdin);
-			mensagem("****** C¢digo j† cadastrado ! ******",22);
+			mensagem("****** C¬¢digo j¬† cadastrado ! ******",22);
 			getch();
-			gotoxy(10,22);clreol(); // limpa a linha a partir da posiÁ„o do cursor atÈ o fim
-			gotoxy(43,5);printf("          ");//apaga o cÛdigo da tela
+			gotoxy(10,22);clreol(); // limpa a linha a partir da posi√ß√£o do cursor at√© o fim
+			gotoxy(43,5);printf("          ");//apaga o c√≥digo da tela
 		}
 
 	}while( F == 1 );
@@ -95,7 +95,7 @@ void digitar_dados()
 {
 	tela_dados("CADASTRO");
 	agenda.codigo=checar_chave_primaria();
-	if (agenda.codigo==0) return; //CondiÁ„o de encerramento
+	if (agenda.codigo==0) return; //Condi√ß√£o de encerramento
 	fflush(stdin);	
 	gotoxy(18,6);gets(agenda.nome);
 	gotoxy(18,7);gets(agenda.sexo);
@@ -104,7 +104,7 @@ void digitar_dados()
 	gotoxy(48,7);scanf("%d",&agenda.dnasc.ano);
 	fflush(stdin);
 	gotoxy(18,8);gets(agenda.email);
-	agenda.excluido = 'n'; /* atribuiÁ„o de 'n' para o campo excluÌdo para indicar 
+	agenda.excluido = 'n'; /* atribui√ß√£o de 'n' para o campo exclu√≠do para indicar 
 							 que o registro acabou de ser inserido */
 }
 //----------------------------------------------------------------------
@@ -165,7 +165,7 @@ main()
 	do{
 		digitar_dados();
 		if (agenda.codigo==0) 
-			break; //CondiÁ„o de encerramento
+			break; //Condi√ß√£o de encerramento
 		salvar_dados();		
 	}while(true);
 	clrscr(); // limpeza de tela
